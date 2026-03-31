@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportX 體育新聞</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --red: #e63946;
+            --yellow: #ffd60a;
+            --blue: #1d3557;
+            --dark: #0d1117;
+            --gray: #8b949e;
+            --gradient: linear-gradient(135deg, #e63946 0%, #ff6b6b 100%);
+        }
+        
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: var(--dark);
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        /* Header */
+        header {
+            background: var(--blue);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 3px 3px 0 var(--red);
+        }
+        
+        .logo span { color: var(--yellow); }
+        
+        nav { display: flex; gap: 1.5rem; }
+        
+        nav a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            padding: 0.3rem 0;
+        }
+        
+        nav a:hover { color: var(--yellow); }
+        nav a.active { color: var(--yellow); border-bottom: 2px solid var(--yellow); }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 70vh;
+            min-height: 500px;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, var(--dark) 0%, transparent 60%),
+                        linear-gradient(135deg, var(--blue) 0%, #2d5a87 100%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            padding: 3rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--red);
+            padding: 0.4rem 1rem;
+            border-radius: 4px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .live-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .hero h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 600px;
+        }
+        
+        .scoreboard {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            align-items: center;
+        }
+        
+        .team {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .team-logo {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .team-name {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .score {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--yellow);
+        }
+        
+        .match-info {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        /* Content Grid */
+        .container {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 30px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+        
+        .section-link {
+            color: var(--red);
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        /* News Grid */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .news-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--red);
+            box-shadow: 0 10px 30px rgba(230, 57, 70, 0.2);
+        }
+        
+        .news-card .image-placeholder {
+            height: 150px;
+            background: linear-gradient(135deg, rgba(230, 57, 70, 0.2) 0%, rgba(255, 107, 107, 0.1) 100%);
+        }
+        
+        .news-card-content { padding: 1.2rem; }
+        
+        .sport-tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            background: var(--red);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .news-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 0.8rem;
+        }
+        
+        .news-card .meta {
+            font-size: 0.8rem;
+            color: var(--gray);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        /* Standings */
+        .standings {
+            background: rgba(255,255,255,0.02);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .standings table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .standings th {
+            text-align: left;
+            padding: 0.8rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        
+        .standings td {
+            padding: 0.8rem;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        
+        .standings tr:hover { background: rgba(255,255,255,0.02); }
+        
+        .standings .rank {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            color: var(--yellow);
+        }
+        
+        .standings .team-cell {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .standings .points {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            color: white;
+        }
+        
+        /* Footer */
+        footer {
+            margin-top: 4rem;
+            padding: 2rem;
+            background: var(--blue);
+            text-align: center;
+        }
+        
+        footer p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .news-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+            .news-grid { grid-template-columns: 1fr; }
+            nav { display: none; }
+            .hero h1 { font-size: 2rem; }
+            .score { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">SPORT<span>X</span></div>
+            <nav>
+                <a href="#" class="active">首頁</a>
+                <a href="#">籃球</a>
+                <a href="#">棒球</a>
+                <a href="#">足球</a>
+                <a href="#">網球</a>
+                <a href="#">電子競技</a>
+                <a href="#">分析</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <span class="live-badge">LIVE 直播中</span>
+            <h1>瓊斯盃籃球邀請賽<br>台灣 vs 韓國</h1>
+            <p class="subtitle">中華隊下半場急起直追！林庭謙關鍵三分球縮小差距，現場球迷沸騰</p>
+            <div class="scoreboard">
+                <div class="team">
+                    <div class="team-logo">TWN</div>
+                    <span class="team-name">中華隊</span>
+                </div>
+                <div>
+                    <div style="display: flex; gap: 1rem; align-items: center;">
+                        <span class="score">78</span>
+                        <span style="color: var(--gray); font-size: 1.5rem;">:</span>
+                        <span class="score">82</span>
+                    </div>
+                    <div class="match-info">Q4 05:32</div>
+                </div>
+                <div class="team">
+                    <div class="team-logo">KOR</div>
+                    <span class="team-name">韓國</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">最新消息</h2>
+            <a href="#" class="section-link">更多 »</a>
+        </div>
+        
+        <div class="news-grid">
+            <article class="news-card">
+                <div class="image-placeholder"></div>
+                <div class="news-card-content">
+                    <span class="sport-tag">籃球</span>
+                    <h3>T1 聯盟新賽季賽程出爐！六都主場館全面升級</h3>
+                    <div class="meta">
+                        <span>1 小時前</span>
+                        <span>234 閱讀</span>
+                    </div>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="image-placeholder"></div>
+                <div class="news-card-content">
+                    <span class="sport-tag">棒球</span>
+                    <h3>中職選秀大年！這三位新秀被看好挑戰狀元郎</h3>
+                    <div class="meta">
+                        <span>2 小時前</span>
+                        <span>567 閱讀</span>
+                    </div>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="image-placeholder"></div>
+                <div class="news-card-content">
+                    <span class="sport-tag">足球</span>
+                    <h3>亞足聯盃小組賽抽籤結果出爐</h3>
+                    <div class="meta">
+                        <span>3 小時前</span>
+                        <span>123 閱讀</span>
+                    </div>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="image-placeholder"></div>
+                <div class="news-card-content">
+                    <span class="sport-tag">網球</span>
+                    <h3>台灣小將勇闖溫布頓會內賽！創歷史最佳</h3>
+                    <div class="meta">
+                        <span>4 小時前</span>
+                        <span>890 閱讀</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+        
+        <div class="standings">
+            <h3 style="font-family: 'Rajdhani', sans-serif; font-size: 1.3rem; margin-bottom: 1rem;">🏀 PL League 積分榜</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>球隊</th>
+                        <th>勝</th>
+                        <th>敗</th>
+                        <th>勝率</th>
+                        <th>積分</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="rank">1</td>
+                        <td class="team-cell"><span style="color: gold;">🥇</span> 夢想家</td>
+                        <td>18</td>
+                        <td>4</td>
+                        <td>.818</td>
+                        <td class="points">40</td>
+                    </tr>
+                    <tr>
+                        <td class="rank">2</td>
+                        <td class="team-cell"><span style="color: silver;">🥈</span> 攻城獅</td>
+                        <td>15</td>
+                        <td>7</td>
+                        <td>.682</td>
+                        <td class="points">34</td>
+                    </tr>
+                    <tr>
+                        <td class="rank">3</td>
+                        <td class="team-cell"><span style="color: #cd7f32;">🥉</span> 領航猿</td>
+                        <td>14</td>
+                        <td>8</td>
+                        <td>.636</td>
+                        <td class="points">30</td>
+                    </tr>
+                    <tr>
+                        <td class="rank">4</td>
+                        <td class="team-cell">勇士</td>
+                        <td>12</td>
+                        <td>10</td>
+                        <td>.545</td>
+                        <td class="points">26</td>
+                    </tr>
+                    <tr>
+                        <td class="rank">5</td>
+                        <td class="team-cell">國王</td>
+                        <td>10</td>
+                        <td>12</td>
+                        <td>.455</td>
+                        <td class="points">22</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2026 SportX 體育新聞 | 為您掌握最新體育動態</p>
+    </footer>
+</body>
+</html>

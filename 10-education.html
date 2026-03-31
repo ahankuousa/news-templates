@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduLib 教育學習</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --cream: #faf8f3;
+            --paper: #f5f0e6;
+            --ink: #2d2a26;
+            --ink-light: #5c574e;
+            --rust: #b45309;
+            --sage: #6b7280;
+            --sage-light: #9ca3af;
+            --highlight: #fef3c7;
+            --border: #e5dfd5;
+        }
+        
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: var(--cream);
+            color: var(--ink);
+            line-height: 1.8;
+        }
+        
+        /* Header */
+        header {
+            background: var(--paper);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 2rem;
+        }
+        
+        .header-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Source Serif 4', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--rust);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        nav { display: flex; gap: 2.5rem; }
+        
+        nav a {
+            color: var(--ink-light);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover { color: var(--rust); }
+        
+        /* Hero */
+        .hero {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .hero-text h1 {
+            font-family: 'Source Serif 4', serif;
+            font-size: 2.8rem;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--ink);
+        }
+        
+        .hero-text h1 em {
+            font-style: italic;
+            color: var(--rust);
+        }
+        
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--ink-light);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--rust);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background: #92400e;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            color: var(--ink);
+            padding: 0.8rem 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--rust);
+            color: var(--rust);
+        }
+        
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .book-stack {
+            position: relative;
+            width: 280px;
+            height: 280px;
+        }
+        
+        .book {
+            position: absolute;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        .book:nth-child(1) { width: 180px; height: 220px; top: 0; left: 0; transform: rotate(-5deg); }
+        .book:nth-child(2) { width: 160px; height: 200px; top: 20px; left: 60px; transform: rotate(3deg); }
+        .book:nth-child(3) { width: 140px; height: 180px; top: 40px; left: 100px; transform: rotate(-2deg); }
+        
+        /* Featured Section */
+        .featured {
+            background: var(--paper);
+            padding: 3rem 2rem;
+        }
+        
+        .featured-content {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-family: 'Source Serif 4', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: var(--rust);
+            border-radius: 2px;
+        }
+        
+        .section-link {
+            color: var(--rust);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        /* Article List */
+        .article-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .article-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .article-item:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transform: translateX(8px);
+        }
+        
+        .article-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--highlight);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+        
+        .article-content { flex: 1; }
+        
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .article-tag {
+            font-size: 0.75rem;
+            color: var(--rust);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .article-date {
+            font-size: 0.75rem;
+            color: var(--sage-light);
+        }
+        
+        .article-title {
+            font-family: 'Source Serif 4', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+            color: var(--ink);
+        }
+        
+        .article-excerpt {
+            font-size: 0.9rem;
+            color: var(--ink-light);
+            line-height: 1.6;
+        }
+        
+        /* Categories */
+        .categories {
+            max-width: 1100px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .category-card {
+            padding: 2rem;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: var(--ink);
+        }
+        
+        .category-card:hover {
+            border-color: var(--rust);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        }
+        
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .category-card h3 {
+            font-family: 'Source Serif 4', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .category-card p {
+            font-size: 0.85rem;
+            color: var(--ink-light);
+        }
+        
+        /* Quote Section */
+        .quote-section {
+            background: var(--paper);
+            padding: 4rem 2rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        
+        .quote-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .quote-icon {
+            font-size: 3rem;
+            color: var(--rust);
+            opacity: 0.5;
+            margin-bottom: 1rem;
+        }
+        
+        .quote-text {
+            font-family: 'Source Serif 4', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            line-height: 1.5;
+            color: var(--ink);
+            margin-bottom: 1.5rem;
+        }
+        
+        .quote-author {
+            font-size: 0.95rem;
+            color: var(--ink-light);
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            max-width: 600px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        
+        .newsletter h2 {
+            font-family: 'Source Serif 4', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .newsletter p {
+            color: var(--ink-light);
+            margin-bottom: 1.5rem;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 0.8rem;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.8rem 1.2rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+        
+        .newsletter-form button {
+            background: var(--rust);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--ink);
+            color: rgba(255,255,255,0.7);
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .footer-brand .logo {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-brand p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+        }
+        
+        .footer-col h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-col a {
+            display: block;
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.3rem 0;
+        }
+        
+        .footer-col a:hover { color: var(--rust); }
+        
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.4);
+        }
+        
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; text-align: center; }
+            .hero-actions { justify-content: center; }
+            .category-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-content { grid-template-columns: 1fr 1fr; }
+        }
+        
+        @media (max-width: 600px) {
+            .category-grid { grid-template-columns: 1fr; }
+            .newsletter-form { flex-direction: column; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">📚</div>
+                EduLib
+            </div>
+            <nav>
+                <a href="#">首頁</a>
+                <a href="#">線上課程</a>
+                <a href="#">文章</a>
+                <a href="#">電子書</a>
+                <a href="#">Podcast</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-text">
+            <h1>探索知識，<em>啟發</em>未來</h1>
+            <p>匯聚專業師資與優質內容，陪你走在學習的路上。從基礎到進階，從學術到實用，開啟你的知識探索之旅。</p>
+            <div class="hero-actions">
+                <a href="#" class="btn-primary">
+                    開始學習 →
+                </a>
+                <a href="#" class="btn-secondary">
+                    瞭解更多
+                </a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="book-stack">
+                <div class="book">📖</div>
+                <div class="book">📕</div>
+                <div class="book">📗</div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="featured">
+        <div class="featured-content">
+            <div class="section-header">
+                <h2 class="section-title">最新文章</h2>
+                <a href="#" class="section-link">看更多 »</a>
+            </div>
+            
+            <div class="article-list">
+                <article class="article-item">
+                    <div class="article-icon">🎓</div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-tag">升學攻略</span>
+                            <span class="article-date">2026年3月30日</span>
+                        </div>
+                        <h3 class="article-title">113學年度大學個人申請：備審資料製作重點提示</h3>
+                        <p class="article-excerpt">過來人經驗分享：如何讓備審資料在眾多競爭者中脫穎而出？掌握三大核心要素，讓教授一眼就看見你。</p>
+                    </div>
+                </article>
+                <article class="article-item">
+                    <div class="article-icon">💼</div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-tag">職場技能</span>
+                            <span class="article-date">2026年3月28日</span>
+                        </div>
+                        <h3 class="article-title">遠距工作時代：如何提升在家工作效率</h3>
+                        <p class="article-excerpt">整理了多位高效工作者的時間管理技巧，從環境布置到日程規劃，幫助你在家也能保持最佳狀態。</p>
+                    </div>
+                </article>
+                <article class="article-item">
+                    <div class="article-icon">🧠</div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-tag">學習方法</span>
+                            <span class="article-date">2026年3月25日</span>
+                        </div>
+                        <h3 class="article-title">費曼學習法：如何真正理解一個概念</h3>
+                        <p class="article-excerpt">用最簡單的語言解釋複雜的概念，是深度學習的關鍵。本篇文章詳解如何實際應用費曼學習法。</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+    
+    <section class="categories">
+        <div class="section-header">
+            <h2 class="section-title">探索主題</h2>
+        </div>
+        
+        <div class="category-grid">
+            <a href="#" class="category-card">
+                <div class="category-icon">💻</div>
+                <h3>程式設計</h3>
+                <p>從 Python 到 AI，開啟你的coding之路</p>
+            </a>
+            <a href="#" class="category-card">
+                <div class="category-icon">📊</div>
+                <h3>資料科學</h3>
+                <p>大數據分析與機器學習入門</p>
+            </a>
+            <a href="#" class="category-card">
+                <div class="category-icon">🎨</div>
+                <h3>設計創意</h3>
+                <p>培養美學與設計思維</p>
+            </a>
+            <a href="#" class="category-card">
+                <div class="category-icon">📈</div>
+                <h3>商業管理</h3>
+                <p>創業與職場技能全面提升</p>
+            </a>
+            <a href="#" class="category-card">
+                <div class="category-icon">🌍</div>
+                <h3>語言學習</h3>
+                <p>英語與第二外語自學攻略</p>
+            </a>
+            <a href="#" class="category-card">
+                <div class="category-icon">🧪</div>
+                <h3>自然科學</h3>
+                <p>從天文到生物，探索自然奧秘</p>
+            </a>
+        </div>
+    </section>
+    
+    <section class="quote-section">
+        <div class="quote-content">
+            <div class="quote-icon">❝</div>
+            <p class="quote-text">教育的本質，不在於填滿一桶水，而在點燃一把火。</p>
+            <p class="quote-author">— William Butler Yeats</p>
+        </div>
+    </section>
+    
+    <section class="newsletter">
+        <h2>加入學習社群</h2>
+        <p>每週精選優質文章與課程推薦，陪伴你持續成長</p>
+        <div class="newsletter-form">
+            <input type="email" placeholder="輸入您的 email">
+            <button>訂閱</button>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo">📚 EduLib</div>
+                <p>探索知識，啟發未來</p>
+            </div>
+            <div class="footer-col">
+                <h4>內容</h4>
+                <a href="#">線上課程</a>
+                <a href="#">文章專區</a>
+                <a href="#">電子書</a>
+                <a href="#">Podcast</a>
+            </div>
+            <div class="footer-col">
+                <h4>主題</h4>
+                <a href="#">科技</a>
+                <a href="#">商業</a>
+                <a href="#">設計</a>
+                <a href="#">語言</a>
+            </div>
+            <div class="footer-col">
+                <h4>關於</h4>
+                <a href="#">關於我們</a>
+                <a href="#">作者</a>
+                <a href="#">聯絡</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 EduLib. 探索知識，啟發未來。
+        </div>
+    </footer>
+</body>
+</html>

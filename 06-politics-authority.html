@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>政治評論網</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --navy: #1a2634;
+            --dark-red: #8b0000;
+            --gold: #b8860b;
+            --cream: #f5f3ef;
+            --charcoal: #2d2d2d;
+            --border: #d4cfc7;
+        }
+        
+        body {
+            font-family: 'Noto Sans TC', serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.8;
+        }
+        
+        /* Header */
+        header {
+            background: var(--navy);
+            color: white;
+            padding: 1rem 2rem;
+            border-bottom: 4px solid var(--dark-red);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+        }
+        
+        .logo span { color: var(--gold); }
+        
+        .header-date {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+        }
+        
+        nav {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 0.3rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--gold);
+            border-bottom-color: var(--gold);
+        }
+        
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Featured Article */
+        .featured {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .main-article {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 2rem;
+        }
+        
+        .main-article .label {
+            display: inline-block;
+            background: var(--dark-red);
+            color: white;
+            padding: 0.3rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+        
+        .main-article h1 {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+            color: var(--navy);
+        }
+        
+        .main-article .summary {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .author-info .author {
+            font-weight: 700;
+            color: var(--navy);
+        }
+        
+        .author-info .credentials {
+            color: #777;
+        }
+        
+        .author-info .date {
+            color: #999;
+            margin-left: auto;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .sidebar-article {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-left: 3px solid var(--gold);
+        }
+        
+        .sidebar-article h3 {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+        }
+        
+        .sidebar-article .meta {
+            font-size: 0.75rem;
+            color: #999;
+        }
+        
+        /* Section Divider */
+        .section-divider {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+        
+        .section-divider h2 {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--navy);
+            letter-spacing: 4px;
+        }
+        
+        /* Two Column Layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .col-article {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+        }
+        
+        .col-article h3 {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 0.8rem;
+            color: var(--navy);
+        }
+        
+        .col-article p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+        
+        .col-article .source {
+            display: inline-block;
+            background: var(--cream);
+            padding: 0.2rem 0.6rem;
+            font-size: 0.7rem;
+            color: var(--dark-red);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Opinion Section */
+        .opinion-section {
+            background: var(--navy);
+            color: white;
+            padding: 2.5rem;
+            margin: 3rem 0;
+        }
+        
+        .opinion-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .opinion-header h2 {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.5rem;
+            letter-spacing: 4px;
+        }
+        
+        .opinion-header p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 0.5rem;
+        }
+        
+        .opinion-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .opinion-card {
+            background: rgba(255,255,255,0.05);
+            padding: 1.5rem;
+            border-top: 2px solid var(--gold);
+        }
+        
+        .opinion-card h4 {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.1rem;
+            line-height: 1.4;
+            margin-bottom: 0.8rem;
+        }
+        
+        .opinion-card .author {
+            font-size: 0.85rem;
+            color: var(--gold);
+        }
+        
+        .opinion-card .author span {
+            color: rgba(255,255,255,0.5);
+            margin-left: 0.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            color: rgba(255,255,255,0.6);
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        footer p { font-size: 0.85rem; }
+        
+        /* Responsive */
+        @media (max-width: 900px) {
+            .featured { grid-template-columns: 1fr; }
+            .two-col { grid-template-columns: 1fr; }
+            .opinion-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">政治<span>評論</span></div>
+            <div class="header-date">中華民國 115年3月31日</div>
+        </div>
+        <nav>
+            <a href="#" class="active">首頁</a>
+            <a href="#">兩岸關係</a>
+            <a href="#">外交國防</a>
+            <a href="#">經濟政策</a>
+            <a href="#">社會議題</a>
+            <a href="#">國際觀察</a>
+            <a href="#">名家專欄</a>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <section class="featured">
+            <article class="main-article">
+                <span class="label">獨家報導</span>
+                <h1>立法院新會期展開：重點法案搶先看</h1>
+                <p class="summary">本會期將處理多項重大民生法案，包括居住正義、醫療改革與教育經費等議題，朝野攻防預計激烈。</p>
+                <div class="author-info">
+                    <span class="author">王志明</span>
+                    <span class="credentials">資深政治記者</span>
+                    <span class="date">2 小時前</span>
+                </div>
+            </article>
+            
+            <aside class="sidebar">
+                <article class="sidebar-article">
+                    <h3>賴清德總統520就職三週年：政績總體檢</h3>
+                    <span class="meta">3 小時前</span>
+                </article>
+                <article class="sidebar-article">
+                    <h3>美中台三角關係最新走向分析</h3>
+                    <span class="meta">4 小時前</span>
+                </article>
+                <article class="sidebar-article">
+                    <h3>罷免浪潮再起：各黨備戰狀況</h3>
+                    <span class="meta">5 小時前</span>
+                </article>
+                <article class="sidebar-article">
+                    <h3>六都首長施政滿意度民調出爐</h3>
+                    <span class="meta">6 小時前</span>
+                </article>
+            </aside>
+        </section>
+        
+        <div class="section-divider">
+            <h2>▌ 時事觀察 ▌</h2>
+        </div>
+        
+        <section class="two-col">
+            <article class="col-article">
+                <span class="source">外交觀察</span>
+                <h3>台美關係持續深化：經貿談判進展順利</h3>
+                <p>台美21世紀貿易倡議新回合談判結束，雙方在半導體供應鏈、數位貿易等領域達成多項共識。專家指出，這將有助於台灣進一步融入國際經貿體系。</p>
+            </article>
+            <article class="col-article">
+                <span class="source">國防安全</span>
+                <h3>國軍新建構不對稱戰力：雄昇飛彈量產加速</h3>
+                <p>國防部宣佈新版國防預算將優先投入不對稱作戰能力建構，包括雄昇飛彈量產計畫加速進行，以及海軍高效能艦艇採購案啟動。</p>
+            </article>
+            <article class="col-article">
+                <span class="source">經濟政策</span>
+                <h3>基本工資調整談判：勞資雙方立場分歧</h3>
+                <p>基本工資審議委員會召開前夕，勞方代表呼籲調漲10%，資方則認為應審慎評估景氣因素，官方傾向小幅調整。</p>
+            </article>
+            <article class="col-article">
+                <span class="source">社會議題</span>
+                <h3>少子化對策：催生津貼再加碼</h3>
+                <p>行政院拍板提高育兒津貼補助，同時擴大公共化托育名額，期盼透過經濟支持緩解少子化危機。</p>
+            </article>
+        </section>
+        
+        <section class="opinion-section">
+            <div class="opinion-header">
+                <h2>▌ 名家觀點 ▌</h2>
+                <p>獨特視角，深入分析</p>
+            </div>
+            <div class="opinion-grid">
+                <article class="opinion-card">
+                    <h4>「維持現狀」是否仍是最優策略？</h4>
+                    <p class="author">陳文甲<span>前台灣研究所所長</span></p>
+                </article>
+                <article class="opinion-card">
+                    <h4>從地方選舉看政黨政治演變</h4>
+                    <p class="author">黃介正<span>政治大學教授</span></p>
+                </article>
+                <article class="opinion-card">
+                    <h4>青年參政：政治素人的崛起</h4>
+                    <p class="author">林濁水<span>資深評論員</span></p>
+                </article>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>© 2026 政治評論網 | 版權所有 禁止轉載</p>
+        <p style="margin-top: 0.5rem;">本網站言論不代表特定政黨立場</p>
+    </footer>
+</body>
+</html>

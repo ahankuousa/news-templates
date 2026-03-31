@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health+ 醫療健康</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --teal: #0d9488;
+            --teal-light: #14b8a6;
+            --teal-dark: #0f766e;
+            --mint: #ecfdf5;
+            --blue: #0284c7;
+            --white: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-500: #6b7280;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --coral: #f97316;
+        }
+        
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: var(--white);
+            color: var(--gray-900);
+            line-height: 1.7;
+        }
+        
+        /* Header */
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--teal);
+        }
+        
+        .logo span { color: var(--gray-900); }
+        
+        nav { display: flex; gap: 2rem; }
+        
+        nav a {
+            color: var(--gray-700);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover { color: var(--teal); }
+        
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--mint) 0%, #f0fdf4 50%, var(--white) 100%);
+            padding: 4rem 2rem;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .hero-text h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+        }
+        
+        .hero-text h1 span {
+            color: var(--teal);
+        }
+        
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--gray-500);
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--teal);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .hero-cta:hover {
+            background: var(--teal-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(13, 148, 136, 0.3);
+        }
+        
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .health-icon {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            box-shadow: 0 30px 60px rgba(13, 148, 136, 0.3);
+        }
+        
+        /* Quick Links */
+        .quick-links {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+        
+        .quick-link {
+            background: var(--gray-50);
+            padding: 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--gray-900);
+            transition: all 0.3s;
+        }
+        
+        .quick-link:hover {
+            background: var(--teal);
+            color: white;
+            transform: translateY(-4px);
+        }
+        
+        .quick-link .icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .quick-link h3 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        /* Featured Content */
+        .content {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .section-title .icon { font-size: 1.8rem; }
+        
+        .section-link {
+            color: var(--teal);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        /* Article Grid */
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .article-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .article-card:hover {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transform: translateY(-4px);
+        }
+        
+        .article-card .image {
+            height: 180px;
+            background: linear-gradient(135deg, #e0f2fe 0%, var(--mint) 100%);
+        }
+        
+        .article-card-content { padding: 1.5rem; }
+        
+        .category {
+            display: inline-block;
+            background: var(--mint);
+            color: var(--teal-dark);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+        
+        .article-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 0.8rem;
+        }
+        
+        .article-card p {
+            font-size: 0.9rem;
+            color: var(--gray-500);
+            margin-bottom: 1rem;
+        }
+        
+        .article-card .meta {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        /* Tips Section */
+        .tips-section {
+            background: var(--gray-50);
+            padding: 3rem 2rem;
+            margin: 3rem 0;
+        }
+        
+        .tips-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+        
+        .tip-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 12px;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .tip-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--mint);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .tip-content h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+        
+        .tip-content p {
+            font-size: 0.9rem;
+            color: var(--gray-500);
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+            margin: 3rem 0;
+        }
+        
+        .newsletter h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .newsletter p {
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .newsletter-form button {
+            background: var(--gray-900);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            background: var(--gray-900);
+            color: white;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .footer-brand .logo {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-brand p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+        }
+        
+        .footer-col h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .footer-col a {
+            display: block;
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.3rem 0;
+        }
+        
+        .footer-col a:hover { color: var(--teal); }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.4);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1000px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .quick-links { grid-template-columns: repeat(2, 1fr); }
+            .article-grid { grid-template-columns: repeat(2, 1fr); }
+            .tips-grid { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr 1fr; }
+        }
+        
+        @media (max-width: 600px) {
+            .article-grid { grid-template-columns: 1fr; }
+            .newsletter-form { flex-direction: column; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">Health<span>+</span></div>
+            <nav>
+                <a href="#">首頁</a>
+                <a href="#">健康資訊</a>
+                <a href="#">疾病百科</a>
+                <a href="#">營養飲食</a>
+                <a href="#">運動健身</a>
+                <a href="#">心理成長</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>守護健康，從<span>了解</span>開始</h1>
+                <p>專業醫療團隊把關，提供最可靠的健康資訊與醫療服務，陪伴您和家人走向健康人生。</p>
+                <a href="#" class="hero-cta">
+                    探索健康知識 →
+                </a>
+            </div>
+            <div class="hero-visual">
+                <div class="health-icon">🏥</div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="quick-links">
+        <a href="#" class="quick-link">
+            <div class="icon">🩺</div>
+            <h3>快速掛號</h3>
+        </a>
+        <a href="#" class="quick-link">
+            <div class="icon">💊</div>
+            <h3>用藥查詢</h3>
+        </a>
+        <a href="#" class="quick-link">
+            <div class="icon">📋</div>
+            <h3>健康檢查</h3>
+        </a>
+        <a href="#" class="quick-link">
+            <div class="icon">🧠</div>
+            <h3>心理諮商</h3>
+        </a>
+    </section>
+    
+    <section class="content">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="icon">📰</span>
+                最新健康資訊
+            </h2>
+            <a href="#" class="section-link">看更多 »</a>
+        </div>
+        
+        <div class="article-grid">
+            <article class="article-card">
+                <div class="image"></div>
+                <div class="article-card-content">
+                    <span class="category">疾病防治</span>
+                    <h3>流感進入高峰期！醫師呼籲：高風險族群應速打疫苗</h3>
+                    <p>本季流感疫情升溫，疾管署提醒民眾注意個人衛生，出現症狀應儘速就醫。</p>
+                    <div class="meta">
+                        <span>2 小時前</span>
+                        <span>👁 1.2K</span>
+                    </div>
+                </div>
+            </article>
+            <article class="article-card">
+                <div class="image"></div>
+                <div class="article-card-content">
+                    <span class="category">營養飲食</span>
+                    <h3>最新研究：地中海飲食可降低失智風險達30%</h3>
+                    <p>國外研究證實，長期採用地中海飲食模式，對認知功能有顯著保護作用。</p>
+                    <div class="meta">
+                        <span>4 小時前</span>
+                        <span>👁 2.3K</span>
+                    </div>
+                </div>
+            </article>
+            <article class="article-card">
+                <div class="image"></div>
+                <div class="article-card-content">
+                    <span class="category">運動健身</span>
+                    <h3>每天30分鐘：專家推廌最適合上班族的運動</h3>
+                    <p>沒有時間運動？試試這套高效運動法，利用零碎時間也能保持健康。</p>
+                    <div class="meta">
+                        <span>6 小時前</span>
+                        <span>👁 3.1K</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    
+    <section class="tips-section">
+        <div class="tips-content">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="icon">💡</span>
+                    健康生活小技巧
+                </h2>
+            </div>
+            
+            <div class="tips-grid">
+                <article class="tip-card">
+                    <div class="tip-icon">💧</div>
+                    <div class="tip-content">
+                        <h4>每日喝水量公式</h4>
+                        <p>體重(公斤) × 30cc = 每日建議飲水量。例如60公斤的人每天建議喝1800cc水。</p>
+                    </div>
+                </article>
+                <article class="tip-card">
+                    <div class="tip-icon">😴</div>
+                    <div class="tip-content">
+                        <h4>優質睡眠的關鍵</h4>
+                        <p>睡前1小時避免使用3C產品，保持規律作息時間，每天同一時間睡覺和起床。</p>
+                    </div>
+                </article>
+                <article class="tip-card">
+                    <div class="tip-icon">🥗</div>
+                    <div class="tip-content">
+                        <h4>彩虹飲食原則</h4>
+                        <p>每天攝取5種以上顏色的蔬果，確保獲得多元營養素，增強免疫力。</p>
+                    </div>
+                </article>
+                <article class="tip-card">
+                    <div class="tip-icon">🚶</div>
+                    <div class="tip-content">
+                        <h4>萬步路的迷思</h4>
+                        <p>研究顯示每次10分鐘以上的活動對健康更有幫助，不必一次走完一萬步。</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+    
+    <section class="newsletter">
+        <h2>訂閱健康電子報</h2>
+        <p>每週收到最實用的健康資訊與生活建議</p>
+        <div class="newsletter-form">
+            <input type="email" placeholder="輸入您的 email">
+            <button>訂閱</button>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo">Health<span>+</span></div>
+                <p>專業、可靠、守護您和家人的健康</p>
+            </div>
+            <div class="footer-col">
+                <h4>服務項目</h4>
+                <a href="#">線上掛號</a>
+                <a href="#">健康檢查</a>
+                <a href="#">慢性病管理</a>
+                <a href="#">遠距醫療</a>
+            </div>
+            <div class="footer-col">
+                <h4>健康資訊</h4>
+                <a href="#">疾病百科</a>
+                <a href="#">用藥安全</a>
+                <a href="#">營養資訊</a>
+                <a href="#">心理衛生</a>
+            </div>
+            <div class="footer-col">
+                <h4>關於我們</h4>
+                <a href="#">簡介</a>
+                <a href="#">醫療團隊</a>
+                <a href="#">聯絡我們</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 Health+ Medical Group. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>

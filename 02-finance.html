@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinanceDaily 財經新聞</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --gold: #c9a962;
+            --gold-dark: #8b7355;
+            --navy: #1a2a3a;
+            --cream: #faf9f7;
+            --charcoal: #2d2d2d;
+            --border: #e0dcd4;
+        }
+        
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        header {
+            background: var(--navy);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-bottom: 4px solid var(--gold);
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        
+        .logo span { color: var(--gold); }
+        
+        .header-links {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.85rem;
+        }
+        
+        .header-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .header-links a:hover { color: var(--gold); }
+        
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 1rem;
+            display: flex;
+            gap: 2.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            border-bottom-color: var(--gold);
+            color: var(--gold);
+        }
+        
+        /* Market Ticker */
+        .ticker-wrap {
+            background: var(--charcoal);
+            overflow: hidden;
+            padding: 0.8rem 0;
+        }
+        
+        .ticker {
+            display: flex;
+            gap: 3rem;
+            animation: ticker 30s linear infinite;
+            white-space: nowrap;
+        }
+        
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        .ticker-item.up { color: #4caf50; }
+        .ticker-item.down { color: #f44336; }
+        
+        .ticker-item .symbol { font-weight: 700; }
+        .ticker-item .price { font-family: 'Playfair Display', serif; }
+        .ticker-item .change { font-size: 0.8rem; }
+        
+        /* Main Layout */
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 2.5rem;
+        }
+        
+        /* Featured Story */
+        .featured {
+            position: relative;
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--gold);
+            color: var(--navy);
+            padding: 0.4rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .featured-image {
+            width: 100%;
+            height: 420px;
+            background: linear-gradient(135deg, var(--navy) 0%, #2d4a5e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+        
+        .featured-image span {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: rgba(255,255,255,0.3);
+        }
+        
+        .featured-content {
+            padding: 1.5rem 0;
+        }
+        
+        .category {
+            color: var(--gold-dark);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+        
+        .featured-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            color: var(--navy);
+        }
+        
+        .featured-content .summary {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        .meta {
+            font-size: 0.85rem;
+            color: #888;
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .meta .author { color: var(--navy); font-weight: 500; }
+        
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .sidebar-section {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .sidebar-title {
+            background: var(--navy);
+            color: white;
+            padding: 0.8rem 1rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .sidebar-article {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .sidebar-article:last-child { border-bottom: none; }
+        
+        .sidebar-article h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+            color: var(--charcoal);
+        }
+        
+        .sidebar-article .time {
+            font-size: 0.75rem;
+            color: #888;
+        }
+        
+        .sidebar-article.up .change { color: #4caf50; font-weight: 700; }
+        .sidebar-article.down .change { color: #f44336; font-weight: 700; }
+        
+        /* News Grid */
+        .news-section {
+            margin-top: 2.5rem;
+            padding: 0 2rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--navy);
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--navy);
+        }
+        
+        .section-title::before {
+            content: '◆ ';
+            color: var(--gold);
+            font-size: 0.8rem;
+        }
+        
+        .section-link {
+            color: var(--gold-dark);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .news-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .news-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .news-card:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transform: translateY(-3px);
+        }
+        
+        .news-card .image-placeholder {
+            height: 160px;
+            background: linear-gradient(135deg, #e8e4dc 0%, #d4cfc5 100%);
+        }
+        
+        .news-card-content { padding: 1rem; }
+        
+        .news-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 0.8rem;
+        }
+        
+        .news-card .time {
+            font-size: 0.75rem;
+            color: #888;
+        }
+        
+        /* Footer */
+        footer {
+            margin-top: 4rem;
+            background: var(--navy);
+            color: rgba(255,255,255,0.7);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-logo span { color: var(--gold); }
+        
+        footer p { font-size: 0.85rem; }
+        
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .container { grid-template-columns: 1fr; }
+            .news-row { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+            .news-row { grid-template-columns: 1fr; }
+            .header-links { display: none; }
+            nav { flex-wrap: wrap; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="logo">Finance<span>Daily</span></div>
+            <div class="header-links">
+                <a href="#">訂閱電子報</a>
+                <a href="#">會員登入</a>
+                <a href="#">廣告洽詢</a>
+            </div>
+        </div>
+        <nav>
+            <a href="#" class="active">首頁</a>
+            <a href="#">台股</a>
+            <a href="#">美股</a>
+            <a href="#">外匯</a>
+            <a href="#">期貨</a>
+            <a href="#">基金</a>
+            <a href="#">房地產</a>
+            <a href="#">專家觀點</a>
+        </nav>
+    </header>
+    
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <div class="ticker-item up"><span class="symbol">加權指數</span><span class="price">23,456.78</span><span class="change">▲ +1.23%</span></div>
+            <div class="ticker-item up"><span class="symbol">台積電</span><span class="price">1,058</span><span class="change">▲ +2.45%</span></div>
+            <div class="ticker-item down"><span class="symbol">聯發科</span><span class="price">1,234</span><span class="change">▼ -0.89%</span></div>
+            <div class="ticker-item up"><span class="symbol">鴻海</span><span class="price">178.5</span><span class="change">▲ +1.12%</span></div>
+            <div class="ticker-item up"><span class="symbol">S&P 500</span><span class="price">5,678.90</span><span class="change">▲ +0.45%</span></div>
+            <div class="ticker-item down"><span class="symbol">NASDAQ</span><span class="price">17,890.12</span><span class="change">▼ -0.23%</span></div>
+            <div class="ticker-item up"><span class="symbol">USD/TWD</span><span class="price">31.45</span><span class="change">▲ +0.12%</span></div>
+            <div class="ticker-item up"><span class="symbol">BTC</span><span class="price">89,500</span><span class="change">▲ +3.21%</span></div>
+            <!-- Duplicate for seamless loop -->
+            <div class="ticker-item up"><span class="symbol">加權指數</span><span class="price">23,456.78</span><span class="change">▲ +1.23%</span></div>
+            <div class="ticker-item up"><span class="symbol">台積電</span><span class="price">1,058</span><span class="change">▲ +2.45%</span></div>
+            <div class="ticker-item down"><span class="symbol">聯發科</span><span class="price">1,234</span><span class="change">▼ -0.89%</span></div>
+            <div class="ticker-item up"><span class="symbol">鴻海</span><span class="price">178.5</span><span class="change">▲ +1.12%</span></div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <main class="featured">
+            <span class="featured-badge">封面故事</span>
+            <div class="featured-image"><span>FINANCE</span></div>
+            <div class="featured-content">
+                <span class="category">總經透視</span>
+                <h1>央行利率決策出爐！2026 年貨幣政策走向深度分析</h1>
+                <p class="summary">中央銀行今日宣佈維持利率不變，符合市場預期。專家指出，未來利率走向將取決於通膨數據與國際景氣變化，建議投資人密切關注下半年GDP成長率與核心物價指數。</p>
+                <div class="meta">
+                    <span class="author">王建民 資深分析師</span>
+                    <span>2 小時前</span>
+                    <span>閱讀 2,345 次</span>
+                </div>
+            </div>
+        </main>
+        
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">台股重點股</div>
+                <div class="sidebar-article up">
+                    <h4>台積電股價再創新高，AI 需求持續強勁</h4>
+                    <span class="time">30 分鐘前</span>
+                    <div class="change">+2.45%</div>
+                </div>
+                <div class="sidebar-article down">
+                    <h4>聯發科法說會後遭降評，股價走弱</h4>
+                    <span class="time">1 小時前</span>
+                    <div class="change">-0.89%</div>
+                </div>
+                <div class="sidebar-article up">
+                    <h4>鴻海攜手輝達，共拓 AI 伺服器版圖</h4>
+                    <span class="time">2 小時前</span>
+                    <div class="change">+1.12%</div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">專家觀點</div>
+                <div class="sidebar-article">
+                    <h4>謝金河：台股萬八並非終點，基本面支撐有基之彈</h4>
+                    <span class="time">3 小時前</span>
+                </div>
+                <div class="sidebar-article">
+                    <h4>郭明錤：AI 供應鏈第四季展望佳，這些類股值得關注</h4>
+                    <span class="time">5 小時前</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+    
+    <section class="news-section">
+        <div class="section-header">
+            <h2 class="section-title">財經要聞</h2>
+            <a href="#" class="section-link">更多 »</a>
+        </div>
+        <div class="news-row">
+            <article class="news-card">
+                <div class="image-placeholder"></div>
+                <div class="news-card-content">
+                    <h3>金管會宣佈新制：上市櫃公司ESG揭露標準再提高</h3>
+                    <span class="time">1 小時前</span>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="image-placeholder"></div>
+                <div class="news-card-content">
+                    <h3>新青安房貸政策調整上路，首購族影響一次看</h3>
+                    <span class="time">2 小時前</span>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="image-placeholder"></div>
+                <div class="news-card-content">
+                    <h3>比特幣突破9萬美元，帶動加密貨幣概念股齊漲</h3>
+                    <span class="time">3 小時前</span>
+                </div>
+            </article>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-logo">Finance<span>Daily</span></div>
+        <p>© 2026 FinanceDaily 財經新聞 | 投資有風險，請審慎評估</p>
+    </footer>
+</body>
+</html>

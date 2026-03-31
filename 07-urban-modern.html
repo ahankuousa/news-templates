@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban Times 都會生活</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray-100: #f7f7f7;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-500: #737373;
+            --gray-700: #404040;
+            --gray-900: #171717;
+            --accent: #0066ff;
+            --warm: #ff6b35;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 1rem 2rem;
+        }
+        
+        .header-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        
+        .logo span { color: var(--accent); }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--gray-100);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--gray-500);
+        }
+        
+        nav { display: flex; gap: 2rem; }
+        
+        nav a {
+            color: var(--gray-700);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover { color: var(--gray-900); }
+        
+        /* Hero */
+        .hero {
+            max-width: 1300px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 2rem;
+        }
+        
+        .hero-main {
+            position: relative;
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 450px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            position: relative;
+        }
+        
+        .hero-image::after {
+            content: 'URBAN';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 5rem;
+            font-weight: 800;
+            color: rgba(255,255,255,0.05);
+            letter-spacing: 10px;
+        }
+        
+        .hero-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+        }
+        
+        .category-tag {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 4px;
+            margin-bottom: 0.8rem;
+        }
+        
+        .hero-content h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero-content p {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        /* Side Stories */
+        .hero-side {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .side-story {
+            padding: 1.2rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .side-story:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 20px rgba(0,102,255,0.1);
+        }
+        
+        .side-story .number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--gray-200);
+            margin-bottom: 0.5rem;
+        }
+        
+        .side-story h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+        }
+        
+        .side-story .meta {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+        }
+        
+        /* Content Grid */
+        .content-grid {
+            max-width: 1300px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--gray-900);
+        }
+        
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .section-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .news-card {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        
+        .news-card .image {
+            height: 180px;
+            background: linear-gradient(135deg, #e8e8e8 0%, #d4d4d4 100%);
+        }
+        
+        .news-card-content { padding: 1.2rem; }
+        
+        .news-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 0.8rem;
+        }
+        
+        .news-card .meta {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            background: var(--gray-900);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 3rem 0;
+        }
+        
+        .newsletter h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .newsletter p {
+            color: var(--gray-500);
+            margin-bottom: 2rem;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .newsletter-form button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--gray-200);
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .footer-brand {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-brand span { color: var(--accent); }
+        
+        .footer-brand p {
+            font-size: 0.9rem;
+            color: var(--gray-500);
+        }
+        
+        .footer-col h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray-500);
+            margin-bottom: 1rem;
+        }
+        
+        .footer-col a {
+            display: block;
+            color: var(--gray-700);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.3rem 0;
+        }
+        
+        .footer-col a:hover { color: var(--accent); }
+        
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--gray-200);
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--gray-500);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1000px) {
+            .hero { grid-template-columns: 1fr; }
+            .grid-3 { grid-template-columns: repeat(2, 1fr); }
+            .footer-content { grid-template-columns: 1fr 1fr; }
+        }
+        
+        @media (max-width: 600px) {
+            .grid-3 { grid-template-columns: 1fr; }
+            nav { display: none; }
+            .newsletter-form { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">Urban<span>Times</span></div>
+            <div class="header-right">
+                <div class="search-box">🔍 搜尋文章...</div>
+            </div>
+        </div>
+        <nav style="max-width: 1300px; margin: 0 auto; padding-top: 1rem; display: flex; gap: 2rem;">
+            <a href="#">都會</a>
+            <a href="#">社會</a>
+            <a href="#">環境</a>
+            <a href="#">交通</a>
+            <a href="#">房市</a>
+            <a href="#">消費</a>
+            <a href="#">文化</a>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <article class="hero-main">
+            <div class="hero-image"></div>
+            <div class="hero-content">
+                <span class="category-tag">封面故事</span>
+                <h1>台北市2050淨零排放路徑出爐：四大策略一次看懂</h1>
+                <p>市府宣佈將投資2000億推動綠色運輸、智慧建築與再生能源，邁向永續城市</p>
+            </div>
+        </article>
+        
+        <div class="hero-side">
+            <div class="side-story">
+                <div class="number">01</div>
+                <h3>捷運環狀線全線開通：通勤族注意！改點資訊一次看</h3>
+                <span class="meta">30 分鐘前</span>
+            </div>
+            <div class="side-story">
+                <div class="number">02</div>
+                <h3>租金補貼新制上路：单身青年每月最高領4000元</h3>
+                <span class="meta">1 小時前</span>
+            </div>
+            <div class="side-story">
+                <div class="number">03</div>
+                <h3>雙子星大樓預計明年完工：西區門戶計畫新地標</h3>
+                <span class="meta">2 小時前</span>
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-grid">
+        <div class="section-header">
+            <h2 class="section-title">最新議題</h2>
+            <a href="#" class="section-link">看更多 »</a>
+        </div>
+        
+        <div class="grid-3">
+            <article class="news-card">
+                <div class="image"></div>
+                <div class="news-card-content">
+                    <h3>公托政策再升級：北市宣佈新增12處公共托嬰中心</h3>
+                    <div class="meta">
+                        <span>社會</span>
+                        <span>1 小時前</span>
+                    </div>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="image"></div>
+                <div class="news-card-content">
+                    <h3>YouBike 3.0全面升級：新增電輔車與無樁站點</h3>
+                    <div class="meta">
+                        <span>交通</span>
+                        <span>2 小時前</span>
+                    </div>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="image"></div>
+                <div class="news-card-content">
+                    <h3>五星級市場改建爭議：攤商自救會北上陳情</h3>
+                    <div class="meta">
+                        <span>都會</span>
+                        <span>3 小時前</span>
+                    </div>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="image"></div>
+                <div class="news-card-content">
+                    <h3>廢棄手機回收大作戰：目標年回收50萬支</h3>
+                    <div class="meta">
+                        <span>環境</span>
+                        <span>4 小時前</span>
+                    </div>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="image"></div>
+                <div class="news-card-content">
+                    <h3>夜市觀光新體驗：士林夜市導入AR互動導覽</h3>
+                    <div class="meta">
+                        <span>文化</span>
+                        <span>5 小時前</span>
+                    </div>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="image"></div>
+                <div class="news-card-content">
+                    <h3>都更危老新制：容積獎勵最高加碼50%</h3>
+                    <div class="meta">
+                        <span>房市</span>
+                        <span>6 小時前</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    
+    <section class="newsletter">
+        <h2>掌握城市脈動</h2>
+        <p>訂閱都會生活電子報，每週精選議題深度分析</p>
+        <div class="newsletter-form">
+            <input type="email" placeholder="輸入您的 email">
+            <button>訂閱</button>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <div>
+                <div class="footer-brand">Urban<span>Times</span></div>
+                <p>為您掌握都會生活的每一個重要時刻</p>
+            </div>
+            <div class="footer-col">
+                <h4>分類</h4>
+                <a href="#">都會</a>
+                <a href="#">社會</a>
+                <a href="#">環境</a>
+                <a href="#">交通</a>
+            </div>
+            <div class="footer-col">
+                <h4>服務</h4>
+                <a href="#">RSS 訂閱</a>
+                <a href="#">App 下載</a>
+                <a href="#">廣告合作</a>
+            </div>
+            <div class="footer-col">
+                <h4>關於</h4>
+                <a href="#">簡介</a>
+                <a href="#">聯絡</a>
+                <a href="#">隱私</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 Urban Times. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechPulse 科技新聞</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --neon-cyan: #00f0ff;
+            --neon-pink: #ff00ff;
+            --neon-purple: #9d00ff;
+            --dark-bg: #0a0a0f;
+            --card-bg: #12121a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+        }
+        
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(ellipse at 20% 0%, rgba(0, 240, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(157, 0, 255, 0.1) 0%, transparent 50%);
+        }
+        
+        /* Header */
+        header {
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+        
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+        }
+        
+        nav { display: flex; gap: 2rem; }
+        
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .featured-article {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            transition: all 0.4s;
+        }
+        
+        .featured-article:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .featured-article .image-placeholder {
+            height: 350px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .featured-article .image-placeholder::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(0, 240, 255, 0.1) 50%, transparent 70%);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+        
+        .featured-content {
+            padding: 1.5rem;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 4px;
+            margin-bottom: 0.8rem;
+        }
+        
+        .featured-content h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 0.8rem;
+        }
+        
+        .featured-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .time {
+            font-size: 0.8rem;
+            color: var(--neon-cyan);
+            margin-top: 1rem;
+            display: block;
+        }
+        
+        /* Side Articles */
+        .side-articles {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .side-article {
+            background: var(--card-bg);
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+        }
+        
+        .side-article:hover {
+            border-color: var(--neon-purple);
+            background: rgba(157, 0, 255, 0.1);
+        }
+        
+        .side-article h3 {
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+        }
+        
+        .side-article .meta {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        /* News Grid */
+        .news-grid {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--neon-cyan);
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 3px solid var(--neon-cyan);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .news-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--neon-pink);
+            box-shadow: 0 10px 30px rgba(255, 0, 255, 0.2);
+        }
+        
+        .news-card .image-placeholder {
+            height: 180px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        .news-card-content { padding: 1.2rem; }
+        
+        .news-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+        }
+        
+        .news-card .meta {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .meta .source { color: var(--neon-purple); }
+        
+        /* Footer */
+        footer {
+            margin-top: 4rem;
+            padding: 2rem;
+            border-top: 1px solid rgba(0, 240, 255, 0.2);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">TECHPULSE</div>
+        <nav>
+            <a href="#">首頁</a>
+            <a href="#">AI 人工智慧</a>
+            <a href="#">區塊鏈</a>
+            <a href="#">半導體</a>
+            <a href="#">新創</a>
+            <a href="#">評論</a>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <article class="featured-article">
+            <div class="image-placeholder">
+                <span style="color: var(--neon-cyan); font-family: 'Orbitron'; font-size: 2rem;">AI CHIP</span>
+            </div>
+            <div class="featured-content">
+                <span class="tag">獨家報導</span>
+                <h1>輝達新一代 AI 晶片效能突破！台積電製程技術再創高峰</h1>
+                <p>最新消息指出，輝達下一代 AI 加速器將採用台積電 3 奈米製程，效能較前代提升 300%，預計明年第二季量產。</p>
+                <span class="time">2 小時前 · 張志偉</span>
+            </div>
+        </article>
+        
+        <div class="side-articles">
+            <article class="side-article">
+                <h3>蘋果 Vision Pro 2 傳聞：Micro LED 顯示技術取代 OLED</h3>
+                <span class="meta">35 分鐘前</span>
+            </article>
+            <article class="side-article">
+                <h3>特斯拉全自动驾驶系统在亞洲市場獲得監管批准</h3>
+                <span class="meta">1 小時前</span>
+            </article>
+            <article class="side-article">
+                <h3>Spotify 推出 AI 生成音樂平台，挑戰傳統唱片業</h3>
+                <span class="meta">2 小時前</span>
+            </article>
+            <article class="side-article">
+                <h3>Meta 開放全新開源 AI 模型，效能超越 GPT-4</h3>
+                <span class="meta">3 小時前</span>
+            </article>
+        </div>
+    </section>
+    
+    <section class="news-grid">
+        <h2 class="section-title">最新科技</h2>
+        <div class="grid">
+            <article class="news-card">
+                <div class="image-placeholder"></div>
+                <div class="news-card-content">
+                    <h3>三星宣佈記憶體新技術，LPDDR6 將問世</h3>
+                    <div class="meta">
+                        <span>科技快報</span>
+                        <span>1 小時前</span>
+                    </div>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="image-placeholder"></div>
+                <div class="news-card-content">
+                    <h3>OpenAI 估值破千億美元，成為第三大獨角獸</h3>
+                    <div class="meta">
+                        <span>新創圈</span>
+                        <span>2 小時前</span>
+                    </div>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="image-placeholder"></div>
+                <div class="news-card-content">
+                    <h3>英特爾代工業務加速，2026 年量產 18A 製程</h3>
+                    <div class="meta">
+                        <span>半導體</span>
+                        <span>3 小時前</span>
+                    </div>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="image-placeholder"></div>
+                <div class="news-card-content">
+                    <h3>Web3 錢包用戶突破 1 億大關，普及率飆升</h3>
+                    <div class="meta">
+                        <span>區塊鏈</span>
+                        <span>4 小時前</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    
+    <footer>
+        <p>© 2026 TechPulse 科技新聞 | 聯絡我們 | 隱私政策 | 廣告合作</p>
+    </footer>
+</body>
+</html>

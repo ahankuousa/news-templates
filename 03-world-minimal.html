@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Global Gazette 國際新聞</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --ink: #1a1a1a;
+            --paper: #f5f3ef;
+            --accent: #8b0000;
+            --gray: #666;
+            --light-gray: #999;
+            --border: #d4d0c8;
+        }
+        
+        body {
+            font-family: 'Source Serif 4', serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.7;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Header - Newspaper masthead */
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--ink);
+            margin-bottom: 2rem;
+        }
+        
+        .masthead-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--gray);
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .masthead-date {
+            font-style: italic;
+        }
+        
+        .masthead-weather {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.75rem;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            margin: 1rem 0;
+        }
+        
+        .tagline {
+            font-style: italic;
+            color: var(--gray);
+            font-size: 1rem;
+        }
+        
+        .masthead-bottom {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .masthead-bottom span { color: var(--accent); }
+        
+        /* Main Content */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        /* Lead Story */
+        .lead-story {
+            border-right: 1px solid var(--border);
+            padding-right: 2rem;
+        }
+        
+        .lead-image {
+            width: 100%;
+            height: 350px;
+            background: linear-gradient(135deg, #e8e4dc 0%, #d0ccc2 100%);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .lead-image span {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--light-gray);
+        }
+        
+        .section-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .lead-story h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        .lead-story .summary {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+        
+        .byline {
+            font-size: 0.85rem;
+            color: var(--light-gray);
+            font-style: italic;
+        }
+        
+        /* Side Columns */
+        .side-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .side-article {
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .side-article:last-child {
+            border-bottom: none;
+        }
+        
+        .side-article h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+        
+        .side-article p {
+            font-size: 0.95rem;
+            color: var(--gray);
+        }
+        
+        /* Divider */
+        .section-divider {
+            border: none;
+            border-top: 1px solid var(--ink);
+            margin: 2rem 0;
+        }
+        
+        /* Three Column Grid */
+        .three-col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .col-article {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .col-article .image-placeholder {
+            width: 100%;
+            height: 140px;
+            background: linear-gradient(135deg, #e8e4dc 0%, #d0ccc2 100%);
+        }
+        
+        .col-article h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .col-article .source {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+        }
+        
+        .col-article p {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        /* Opinion Section */
+        .opinion-section {
+            background: var(--ink);
+            color: white;
+            padding: 2rem;
+            margin: 3rem 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .opinion-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            grid-column: 1 / -1;
+        }
+        
+        .opinion-item {
+            padding: 1rem 0;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .opinion-item h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+        
+        .opinion-item .author {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 2px solid var(--ink);
+            margin-top: 2rem;
+        }
+        
+        footer p {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1000px) {
+            .main-grid { grid-template-columns: 1fr 1fr; }
+            .lead-story { grid-column: 1 / -1; border-right: none; padding-right: 0; }
+            .three-col { grid-template-columns: 1fr 1fr; }
+            .opinion-section { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 600px) {
+            .main-grid { grid-template-columns: 1fr; }
+            .three-col { grid-template-columns: 1fr; }
+            .logo { font-size: 2.5rem; }
+            .masthead-bottom { flex-wrap: wrap; gap: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="masthead-top">
+            <span class="masthead-date">Tuesday, March 31, 2026</span>
+            <span class="masthead-weather">Taipei, Cloudy, 24°C</span>
+        </div>
+        <div class="logo">THE GLOBAL GAZETTE</div>
+        <div class="tagline">Independent Journalism Since 1952</div>
+        <div class="masthead-bottom">
+            <div>World <span>•</span> Politics <span>•</span> Business <span>•</span> Science <span>•</span> Culture</div>
+        </div>
+    </header>
+    
+    <section class="main-grid">
+        <article class="lead-story">
+            <div class="section-label">Featured Report</div>
+            <div class="lead-image"><span>UNITED NATIONS</span></div>
+            <h1>Global Climate Summit Reaches Historic Agreement on Carbon Emissions</h1>
+            <p class="summary">World leaders convene in Geneva to finalize unprecedented commitments, setting binding targets for a net-zero future by 2050.</p>
+            <p class="byline">By Catherine M. Thompson, Chief International Correspondent</p>
+        </article>
+        
+        <div class="side-col">
+            <article class="side-article">
+                <h3>European Union Announces Major Economic Stimulus Package</h3>
+                <p>Brussels reveals 500 billion euro plan to boost green transition and digital infrastructure across member states.</p>
+            </article>
+            <article class="side-article">
+                <h3>Asia-Pacific Trade Deal Enters Final Negotiation Phase</h3>
+                <p>Representatives from 21 nations gather in Singapore for decisive talks on tariff reductions.</p>
+            </article>
+            <article class="side-article">
+                <h3>UN Security Council Calls Emergency Session</h3>
+                <p>Diplomatic tensions rise as Middle East situation demands immediate international attention.</p>
+            </article>
+        </div>
+        
+        <div class="side-col">
+            <article class="side-article">
+                <span class="section-label">Analysis</span>
+                <h3>India's Economic Surge: A New Global Power Emerges</h3>
+                <p>Expert analysis examines the factors driving unprecedented growth in South Asia.</p>
+            </article>
+            <article class="side-article">
+                <span class="section-label">Business</span>
+                <h3>Tech Giants Face New Regulatory Framework</h3>
+                <p>International standards body releases comprehensive guidelines for AI governance.</p>
+            </article>
+        </div>
+    </section>
+    
+    <hr class="section-divider">
+    
+    <section class="three-col">
+        <article class="col-article">
+            <span class="source">Science</span>
+            <div class="image-placeholder"></div>
+            <h4>Ocean Discovery Reveals New Species in Mariana Trench</h4>
+            <p>Deep-sea expedition documents remarkable biodiversity in previously unexplored zone.</p>
+        </article>
+        <article class="col-article">
+            <span class="source">Culture</span>
+            <div class="image-placeholder"></div>
+            <h4>Venice Biennale Opens with Bold Statement on Digital Art</h4>
+            <p>This year's exhibition challenges traditional boundaries of artistic expression.</p>
+        </article>
+        <article class="col-article">
+            <span class="source">Technology</span>
+            <div class="image-placeholder"></div>
+            <h4>Quantum Computing Breakthrough Announced by Research Team</h4>
+            <p>Scientists achieve stable qubit operation, marking major milestone in computing.</p>
+        </article>
+    </section>
+    
+    <section class="opinion-section">
+        <h2>Editorial & Opinion</h2>
+        <article class="opinion-item">
+            <h4>"The Path Forward Requires Unity, Not Division"</h4>
+            <span class="author">— Editorial Board</span>
+        </article>
+        <article class="opinion-item">
+            <h4>"Climate Action Cannot Wait for Perfect Solutions"</h4>
+            <span class="author">— Dr. Elena Rodriguez, Environmental Policy Expert</span>
+        </article>
+        <article class="opinion-item">
+            <h4>"In Defense of Press Freedom Worldwide"</h4>
+            <span class="author">— James Chen, International Affairs Commentator</span>
+        </article>
+        <article class="opinion-item">
+            <h4>"Why Economic Inequality Demands Immediate Attention"</h4>
+            <span class="author">— Prof. Michael Brooks, Economics</span>
+        </article>
+    </section>
+    
+    <footer>
+        <p>© 2026 The Global Gazette | 38 Park Avenue, New York | subscriptions@globalgazette.com</p>
+        <p style="margin-top: 0.5rem;">今日發行量：1,234,567 份 | Established 1952</p>
+    </footer>
+</body>
+</html>
